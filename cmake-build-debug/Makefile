@@ -111,6 +111,19 @@ depend:
 .PHONY : depend
 
 #=============================================================================
+# Target rules for targets named 200_NumberOfIslands
+
+# Build rule for target.
+200_NumberOfIslands: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 200_NumberOfIslands
+.PHONY : 200_NumberOfIslands
+
+# fast build rule for target.
+200_NumberOfIslands/fast:
+	$(MAKE) -f CMakeFiles/200_NumberOfIslands.dir/build.make CMakeFiles/200_NumberOfIslands.dir/build
+.PHONY : 200_NumberOfIslands/fast
+
+#=============================================================================
 # Target rules for targets named test
 
 # Build rule for target.
@@ -150,6 +163,33 @@ leetcode/easy/test.cpp.s:
 	$(MAKE) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/leetcode/easy/test.cpp.s
 .PHONY : leetcode/easy/test.cpp.s
 
+leetcode/medium/200_NumberOfIslands.o: leetcode/medium/200_NumberOfIslands.cpp.o
+
+.PHONY : leetcode/medium/200_NumberOfIslands.o
+
+# target to build an object file
+leetcode/medium/200_NumberOfIslands.cpp.o:
+	$(MAKE) -f CMakeFiles/200_NumberOfIslands.dir/build.make CMakeFiles/200_NumberOfIslands.dir/leetcode/medium/200_NumberOfIslands.cpp.o
+.PHONY : leetcode/medium/200_NumberOfIslands.cpp.o
+
+leetcode/medium/200_NumberOfIslands.i: leetcode/medium/200_NumberOfIslands.cpp.i
+
+.PHONY : leetcode/medium/200_NumberOfIslands.i
+
+# target to preprocess a source file
+leetcode/medium/200_NumberOfIslands.cpp.i:
+	$(MAKE) -f CMakeFiles/200_NumberOfIslands.dir/build.make CMakeFiles/200_NumberOfIslands.dir/leetcode/medium/200_NumberOfIslands.cpp.i
+.PHONY : leetcode/medium/200_NumberOfIslands.cpp.i
+
+leetcode/medium/200_NumberOfIslands.s: leetcode/medium/200_NumberOfIslands.cpp.s
+
+.PHONY : leetcode/medium/200_NumberOfIslands.s
+
+# target to generate assembly for a file
+leetcode/medium/200_NumberOfIslands.cpp.s:
+	$(MAKE) -f CMakeFiles/200_NumberOfIslands.dir/build.make CMakeFiles/200_NumberOfIslands.dir/leetcode/medium/200_NumberOfIslands.cpp.s
+.PHONY : leetcode/medium/200_NumberOfIslands.cpp.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -158,10 +198,14 @@ help:
 	@echo "... depend"
 	@echo "... rebuild_cache"
 	@echo "... edit_cache"
+	@echo "... 200_NumberOfIslands"
 	@echo "... test"
 	@echo "... leetcode/easy/test.o"
 	@echo "... leetcode/easy/test.i"
 	@echo "... leetcode/easy/test.s"
+	@echo "... leetcode/medium/200_NumberOfIslands.o"
+	@echo "... leetcode/medium/200_NumberOfIslands.i"
+	@echo "... leetcode/medium/200_NumberOfIslands.s"
 .PHONY : help
 
 
