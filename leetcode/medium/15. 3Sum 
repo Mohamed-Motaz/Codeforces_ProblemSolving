@@ -6,35 +6,33 @@ public:
         int n = nums.size();
         vector<vector<int>> sol;
         sort(nums.begin(), nums.end());
-        for (int i = 0; i < n - 2; i++){
-            //will check right
-            if(i!=0 && (i <= 0 || nums[i]==nums[i-1]))
-                continue;
-            
-            int need=-nums[i];
-            int l=i+1;
-            int r=n-1;
-            while(l<r){
-                int a=nums[l];
-                int b=nums[r];
-                if(a+b < need)
-                    l++;
-                else if(a+b > need)
-                    r--;
-                else
-                {
-                    sol.push_back({nums[i],a,b});
-                    //avoid duplicates
-                    while(l<r && nums[l]==nums[l+1]) l++;
-                    while(l<r && nums[r]==nums[r-1]) r--;
 
+        for (int i = 0; i < n - 2; i++){
+            if (i && nums[i] == nums[i - 1])   //second duplicate would have already been found by first occurence
+                continue;
+            int needed = -nums[i];
+            int l = i + 1, r = n - 1;
+            while (l < r){
+                int v1 = nums[l];
+                int v2 = nums[r];
+                
+                if (v1 + v2 < needed) l++;
+                
+                else if (v1 + v2 > needed) r--;
+                
+                else{
+                    //need to add to my sol;
+                    sol.push_back({nums[i], v1, v2});
+                    //remove similar cases
+                    while (l < r && nums[l] == nums[l + 1]) l++;
+                    while (l < r && nums[r] == nums[r - 1]) r--;
+                    
                     l++;
                     r--;
                 }
-            
             }
         }
-        
         return sol;
+        
     }
 };
