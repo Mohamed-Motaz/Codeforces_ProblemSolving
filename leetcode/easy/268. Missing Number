@@ -1,0 +1,13 @@
+class Solution {
+public:
+    //goal is to solve in o(1) space and o(n) time
+    int missingNumber(vector<int>& nums) {
+        int tot = 0;
+        for (auto e: nums){
+            tot += e;
+        }
+        int n = nums.size();
+        n = n * (n + 1) / 2;
+        return n - tot;
+    }
+};
