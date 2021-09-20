@@ -1,0 +1,21 @@
+class Solution {
+public:
+    int dp[50];
+    int solve(int cur, int n){
+        if (cur == n)
+            return 1;
+        if (cur > n)
+            return 0; //passed the top
+        int &ans = dp[cur];
+        if (ans != -1)
+            return ans;
+        ans = 0;
+        ans += solve(cur + 1, n);
+        ans += solve(cur + 2, n);
+        return ans;
+    }
+    int climbStairs(int n) {
+        memset(dp, -1, sizeof(dp));
+        return solve(0, n);
+    }
+};
