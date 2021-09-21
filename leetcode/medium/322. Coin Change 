@@ -1,0 +1,49 @@
+class Solution {
+public:
+    int dp[int(1e4 + 7)][15];
+    int solve(int cur, int idx, vector<int>& coins){
+        //4 base cases
+        if (idx == coins.size()){
+            if (cur == 0)
+                return 0;
+            else
+                return int(1e5);
+        }
+        if (cur == 0)
+            return 0;
+        if (cur < 0)
+            return int(1e5);
+        
+        
+        
+        int &ans = dp[cur][idx];
+        if (ans != -1)
+            return ans;
+        ans = 1e5;
+        
+        //check if can take or not
+        if (cur >= coins[idx]){
+            //can take or leave
+            int num = cur / coins[idx];
+            for (int i = 1; i <= num; i++){
+                ans = min(ans, solve(cur - i * coins[idx], idx + 1, coins) + i);  //take
+            }
+            ans = min({
+                ans, 
+                solve(cur, idx + 1, coins)  //leave
+            });
+        }else{
+            //need to move on
+            ans = solve(cur, idx + 1, coins);
+        }
+        return ans;
+        
+    }
+    int coinChange(vector<int>& coins, int amount) {
+        memset(dp, -1, sizeof(dp));
+        int ans = solve(amount, 0, coins);
+        if (ans > 1e4)
+            ans = -1;
+        return ans;
+    }
+};
