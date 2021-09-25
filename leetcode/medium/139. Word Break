@@ -1,0 +1,41 @@
+class Solution {
+public:
+    int dp[303][303];
+    int solve(int idx, int prev, const string &s, const unordered_set<string> &st){
+        if (idx == s.size()){
+            string t = s.substr(prev + 1, idx - prev);
+            if (st.find(t) != st.end())
+                return 1;
+            else
+                return -1e5;
+        }
+        int &ans = dp[idx][prev];
+        if (ans != -1)
+            return ans;
+        ans = 0;
+        
+        string t = s.substr(prev + 1, idx - prev);
+        if (st.find(t) != st.end()){
+            //found it
+            //take or leave
+            ans = max({
+                ans,
+                solve(idx + 1, idx, s, st), //take
+                solve(idx + 1, prev, s, st) //leave
+            });
+        }else{
+            ans = solve(idx + 1, prev, s, st);
+        }
+        
+        return ans;
+    }
+    
+    bool wordBreak(string s, vector<string>& wordDict) {
+        memset(dp, -1, sizeof dp);
+        unordered_set<string> st;
+        for (auto e: wordDict)
+            st.insert(e);
+        string tmp = ' ' + s;   //so that idx starts from 1 not 0, so prev can b 0 not -1
+        return solve(1, 0, tmp, st) > 0 ? true: false;
+    }
+};
