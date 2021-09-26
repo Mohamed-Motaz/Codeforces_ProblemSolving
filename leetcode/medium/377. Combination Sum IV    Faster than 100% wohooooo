@@ -1,6 +1,6 @@
 class Solution {
 public:
-    int dp[1007];
+    int dp[1001];
     int solve(int cur, const int& target, const vector<int> &nums){
         if (cur > target)
             return 0;
@@ -17,9 +17,7 @@ public:
         
     }
     int combinationSum4(vector<int>& nums, int target) {
-        unordered_map<int, int> mp;
-        for (auto e: nums)
-            mp[e]++;
+    
         memset(dp, -1, sizeof dp);
 
         return solve(0, target, nums);
