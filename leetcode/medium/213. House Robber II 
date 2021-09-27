@@ -1,0 +1,36 @@
+class Solution {
+public:
+    int dp[105][2][2];
+    vector<int> nums;
+    int solve(int cur, int prev, bool firstRobbed){
+        if (cur == nums.size())
+            return 0;
+        int &ans = dp[cur][prev][firstRobbed];
+        if (ans != -1)
+            return ans;
+        ans = 0;
+        if (prev || (cur == nums.size() - 1 && firstRobbed)){
+            //robbed prev house  or in final house and robbed firstone
+            ans = solve(cur + 1, 0, firstRobbed);
+        }else{
+            if (cur == 0)
+                //first house
+                ans = max({
+                   solve(cur + 1, 1, 1) + nums[cur], //take
+                   solve(cur + 1, 0, 0) //leave 
+                });
+            else
+                ans = max({
+                   solve(cur + 1, 1, firstRobbed) + nums[cur], //take
+                   solve(cur + 1, 0, firstRobbed) //leave 
+                });
+        }
+        return ans;
+    }
+    
+    int rob(vector<int>& numss) {
+        memset(dp, -1, sizeof dp);
+        nums = numss;
+        return solve(0, 0, 0);
+    }
+};
