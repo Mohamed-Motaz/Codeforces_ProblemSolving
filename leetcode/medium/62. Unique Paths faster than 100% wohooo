@@ -1,0 +1,22 @@
+class Solution {
+public:
+    int dp[101][101];
+    int start, end;
+    int solve(int x, int y){
+        if (x == start && y == end)
+            return 1;
+        if (x > start || y > end)
+            return 0;
+        int &ans = dp[x][y];
+        if (ans != -1)
+            return ans;
+        ans = 0;
+        ans += solve(x + 1, y) + solve(x, y + 1);
+        return ans;
+    }
+    int uniquePaths(int m, int n) {
+        start = m, end = n;
+        memset(dp, -1, sizeof dp);
+        return solve(1, 1);
+    }
+};
