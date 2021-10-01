@@ -1,0 +1,31 @@
+class Solution {
+public:
+    int l, r;
+    int num(char c){
+        return c - 'A';
+    }
+    int dist(){
+        return r - l + 1;
+    }
+    int characterReplacement(string s, int k) {
+        int n = s.size();
+        l = 0, r = 0;
+        int mx = 0;
+        int ctrNotChar = 0;
+        vector<int> v(26, 0);
+        
+        for (;r < n; r++){
+            v[num(s[r])]++;
+            s
+            ctrNotChar = max(ctrNotChar, v[num(s[r])]);
+            
+            if (dist() - ctrNotChar > k){
+                v[num(s[l])]--;
+                l++;
+            }
+            mx = max(mx, dist());
+        }
+        
+        return mx;
+    }
+};
