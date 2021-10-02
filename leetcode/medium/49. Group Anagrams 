@@ -1,0 +1,21 @@
+class Solution {
+public:
+    vector<int> solve(string s){
+        vector<int> v(26, 0);
+        for (auto e: s){
+            v[e - 'a']++;
+        }
+        return v;
+    }
+    vector<vector<string>> groupAnagrams(vector<string>& strs) {
+        map<vector<int>, vector<string>> m;
+        for (auto e: strs){
+            m[solve(e)].push_back(e);
+        }   
+        vector<vector<string>> sol;
+
+        for (auto e: m)
+            sol.push_back(e.second);
+        return sol;
+    }
+};
